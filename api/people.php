@@ -71,6 +71,7 @@ function createPerson($pdo)
         if ($e->errorInfo[1] === 1062) {
             http_response_code(409);
             echo json_encode(["message" => "Erro: Este CPF já está cadastrado no sistema."]);
+            exit;
         }
 
         http_response_code(500);
@@ -108,6 +109,7 @@ function updatePerson($pdo)
         if ($e->errorInfo[1] == 1062) {
             http_response_code(409);
             echo json_encode(["message" => "Erro: Este CPF já pertence a outra pessoa."]);
+            exit;
         } else {
             http_response_code(500);
             echo json_encode(["message" => "Erro interno: " . $e->getMessage()]);
